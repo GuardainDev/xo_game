@@ -1,0 +1,37 @@
+{
+  "name": "onchain_game_poc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chennaigames-server/onchain_game_poc.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chennaigames-server/onchain_game_poc/issues"
+  },
+  "homepage": "https://github.com/chennaigames-server/onchain_game_poc#readme",
+  "dependencies": {
+    "@metamask/sdk": "^0.14.1",
+    "axios": "^1.6.5",
+    "bip39": "^3.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.0",
+    "ethereumjs-wallet": "^1.0.2",
+    "ethers": "^6.9.1",
+    "express": "^4.18.2",
+    "hdkey": "^2.1.0",
+    "mongodb": "^6.3.0",
+    "nodemon": "^3.0.2",
+    "socket.io": "^4.7.2",
+    "telegraf": "^4.15.3",
+    "web3": "^4.3.0"
+  }
+}

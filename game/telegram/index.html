@@ -1,0 +1,159 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>XO- Telegram Gamer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- site favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- All stylesheet and icons css  -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/animate.css">
+    <link rel="stylesheet" href="../assets/css/icofont.min.css">
+    <link rel="stylesheet" href="../assets/css/swiper.min.css">
+    <link rel="stylesheet" href="../assets/css/lightcase.css">
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/style.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"
+        integrity="sha384-mZLF4UVrpi/QTWPA7BjNPEnkIfRFn4ZEO3Qt/HFklTJBj/gBOV8G3HcKn4NfQblz"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.ethers.io/lib/ethers-5.1.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+</head>
+<style>
+
+
+</style>
+
+<body>
+    <!-- preloader start here -->
+    <div class="preloader" id="loading">
+        <!-- <div id="loading"> -->
+        <div class="top-space"></div>
+        <div class="top-space"></div>
+        <img src="../assets/images/loading.gif" alt="">
+        <h3 id="load_id" class="animate__animated animate__heartBeat animate__infinite">Loading...</h3>
+        <!-- </div> -->
+        <!-- <div class="preloader-inner">
+            <div class="" align="center">
+                <h3>[...Please Wait...]</h3>
+                <h3 id="load_id">Initializing Game</h3>
+            </div>
+        </div> -->
+    </div>
+    <!-- preloader ending here -->
+    <!-- <canvas height="280" width="280" id="canvas"></canvas> -->
+    <!-- <div class="menu" id="text" align="center">
+        <input type="checkbox" href="#" class="menu-open" id="menu-open" />
+        <label class="menu-open-button" for="menu-open" align="center">
+            <img src="../site/assets/emojis/10.png" alt="emoji" class="menu-item" height="50" width="50">
+        </label>
+    </div> -->
+    <!-- <div id="loading">
+        <div class="top-space"></div>
+        <div class="top-space"></div>
+        <img src="loading.gif" alt="">
+        <h3 id="load_id" class="animate__animated animate__heartBeat animate__infinite">Loading...</h3>
+    </div> -->
+
+    <div class="top-space"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12" align="center">
+                <!-- <h2 style="color: green;">YOUR TURN</h2> -->
+                <h2 style="color: red;" id="prompt"></h2>
+            </div>
+        </div>
+    </div>
+    <div style="padding-top: 10px;"></div>
+    <div class="container" id="game" style="display: none;">
+        <div class="row">
+            <div class="" align="center">
+                <canvas height="300" width="300" id="canvas"></canvas>
+            </div>
+        </div>
+    </div>
+    <div style="padding-top: 10px;"></div>
+    <div class="container" id="players" style="max-width: 400px;display: none;">
+        <div class="row myfont">
+            <div class="col-6" align="center"
+                style="border: 1px double #fff;border-radius: 10px 0px 0px 10px;padding-top: 5px;" id="player1">
+                <!-- <img src="../site/assets/images/emojis/1.png" width="35" id="emoji_slot" style="visibility: hidden;"
+                    class="taunt-emoji-left" />
+                <p>You (X)</p>
+                <img src="../site/assets/images/achivement/2.png"
+                    style="width:100px;border: 1px dotted #fff; border-radius: 50%;" />
+                <p>Annamalai</p>
+               
+                <div class="menu" id="text" align="center">
+                    <input type="checkbox" href="#" class="menu-open" id="menu-open" />
+                    <label class="menu-open-button" for="menu-open" align="center">
+                        <img src="../site/assets/emojis/10.png" alt="emoji" class="menu-item" height="50" width="50">
+                    </label>
+                </div> -->
+            </div>
+            <div class="col-6" align="center"
+                style="border: 1px double #fff;border-left: none;border-radius: 0px 10px 10px 0px;padding-top: 5px;"
+                id="player2">
+                <!-- <img src="../site/assets/images/emojis/10.png" id="emoji_slot_2" style="visibility: hidden;" width="35"
+                    class="taunt-emoji-right" />
+                <p>Opponent (O)</p>
+                <img src="../site/assets/images/achivement/4.png"
+                    style="width:100px;border: 1px dotted #fff; border-radius: 50%;" />
+                <p>Sarath</p> -->
+            </div>
+        </div>
+    </div>
+    <div id="winnerPopup">
+        <h1 id="win-pop">Congratulations!</h1>
+        <h3 id="points">!</h3>
+        <p id="winnerText">Player X wins!</p>
+
+        <button id="closeButton" class="btn btn-warning" onclick="closePopup()">Close</button>
+    </div>
+
+
+    <!-- All Needed JS -->
+    <script src="../assets/js/vendor/jquery-3.6.0.min.js"></script>
+
+    <script src="../assets/js/vendor/modernizr-3.11.2.min.js"></script>
+    <script src="../assets/js/circularProgressBar.min.js"></script>
+    <script src="../assets/js/isotope.pkgd.min.js"></script>
+    <script src="../assets/js/swiper.min.js"></script>
+    <script src="../assets/js/lightcase.js"></script>
+    <script src="../assets/js/waypoints.min.js"></script>
+    <script src="../assets/js/wow.min.js"></script>
+    <script src="../assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/plugins.js"></script>
+    <!-- <script src="assets/js/main.js"></script> -->
+    <script src="./server.js"></script>
+
+    <script>
+        // if (!sessionStorage.getItem("user_id")) {
+        //     window.location.href = "/onchain_game_poc/site/login.html"
+        // }
+        // document.addEventListener("DOMContentLoaded", function() {
+        //     var userAgent = navigator.userAgent.toLowerCase();
+        //     alert(userAgent);
+        //     var referrer = document.referrer;
+        //     alert(referrer);
+
+        //     if (userAgent.includes("telegram")) {
+        //         alert("Loaded in Telegram");
+        //     } else {
+        //         alert("Loaded in External Browser");
+        //     }
+        // });
+    </script>
+    
+
+
+</body>
+
+</html>
